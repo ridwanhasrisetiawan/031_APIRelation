@@ -24,7 +24,15 @@ async function create(req, res) {
       });
     }
 
-    
+    const existingGenre = await Genre.findOne({
+      where: { nama }
+    });
+
+    if (existingGenre) {
+      return res.status(400).json({
+        message: "Genre sudah ada."
+      });
+    }
 
     
 
