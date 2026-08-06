@@ -34,8 +34,26 @@ async function create(req, res) {
       });
     }
 
-    
+    const genre = await Genre.create({
+      nama,
+      deskripsi
+    });
 
+    return res.status(201).json({
+      message: "Genre berhasil ditambahkan.",
+      data: genre
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message
+    });
+  }
+}
+
+async function update(req, res) {
+  try {
+    const { id } = req.params;
+    const { nama, deskripsi } = req.body;
 
     
 
