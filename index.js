@@ -1,13 +1,7 @@
 
-const connectDatabase = require('./config/db');
+const genreRoute = require('./routes/genreRoute');
 
 
+app.use("/api", require("./routes/api"));
+app.use("/api/genres", genreRoute);
 
-async function startServer() {
-    await connectDatabase();
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-    });
-}
-
-startServer();
