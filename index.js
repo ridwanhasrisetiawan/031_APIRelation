@@ -1,14 +1,13 @@
 const express = require("express");
+const connectDatabase = require("./config/db");
+
 const app = express();
 const PORT = 3000;
-const genreRoute = require('./routes/genreRoute');
-const connectDatabase = require('./config/db');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", require("./routes/api"));
-app.use("/api/genres", genreRoute);
+app.use('/api', require('./routes/api'));
 
 async function startServer() {
     await connectDatabase();
