@@ -91,4 +91,29 @@ async function remove(req, res) {
       });
     }
 
-   
+    const komik = await genre.getKomik();
+
+    if (komik.length > 0) {
+      return res.status(400).json({
+        message: "Genre masih digunakan oleh komik dan tidak dapat dihapus."
+      });
+    }
+
+    await genre.destroy();
+
+    return res.status(200).json({
+      message: "Genre berhasil dihapus."
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message
+    });
+  }
+}
+
+module.exports = {
+  getAll,
+  create,
+  update,
+  remove
+};
