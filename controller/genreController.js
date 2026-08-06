@@ -14,7 +14,15 @@ async function getAll(req, res) {
   }
 }
 
+async function create(req, res) {
+  try {
+    const { nama, deskripsi } = req.body;
 
+    if (!nama) {
+      return res.status(400).json({
+        message: "Nama genre wajib diisi."
+      });
+    }
 
     
 
