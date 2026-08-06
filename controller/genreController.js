@@ -55,8 +55,40 @@ async function update(req, res) {
     const { id } = req.params;
     const { nama, deskripsi } = req.body;
 
-    
+    const genre = await Genre.findByPk(id);
 
+    if (!genre) {
+      return res.status(404).json({
+        message: "Genre tidak ditemukan."
+      });
+    }
 
+    await genre.update({
+      nama,
+      deskripsi
+    });
+
+    return res.status(200).json({
+      message: "Genre berhasil diperbarui.",
+      data: genre
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message
+    });
+  }
+}
+
+async function remove(req, res) {
+  try {
+    const { id } = req.params;
+
+    const genre = await Genre.findByPk(id);
+
+    if (!genre) {
+      return res.status(404).json({
+        message: "Genre tidak ditemukan."
+      });
+    }
 
    
